@@ -1,6 +1,6 @@
 import processing.core.PApplet;
 
-
+import processing.event.KeyEvent;
 
 import java.util.Random;
 
@@ -31,7 +31,8 @@ public class FruitWorld {
         c.background(255);
         c.text("0", 20, 20);
         c.fill(0, 0, 255);
-        c.circle(this.fruit.getX(),this.fruit.getY(), 15);
+        c.circle(this.fruit.getX(),this.fruit.getY(), 10);
+        c.rect(this.basket.getX(), this.basket.getY(), 30, 10);
         return c;
     }
 
@@ -50,7 +51,19 @@ public class FruitWorld {
             return new FruitWorld (new Posn(rand.nextInt(400) , 0), this.basket);
         }
     }
+    
+/** moves the basket in response to Keys*/
+
+public FruitWorld keyPressed(KeyEvent kev) {
+   if (kev.getKeyCode() == PApplet.LEFT) {
+        return new FruitWorld(this.fruit, this.basket.translate(new Posn(-10, 0)));
+    } else if (kev.getKeyCode() == PApplet.RIGHT) {
+        return new FruitWorld(this.fruit, this.basket.translate(new Posn(10, 0)));
+    } else {
+        return this;
     }
+}
+}
     
    
     

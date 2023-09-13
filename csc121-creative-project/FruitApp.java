@@ -12,7 +12,7 @@ public class FruitApp extends PApplet {
     }
     
     public void setup() {
-        w = new FruitWorld(new Posn(200, 0), new Posn(200, 400));
+        w = new FruitWorld(new Posn(200, 0), new Posn(200, 350));
     }
     
     public void draw() {
@@ -22,7 +22,7 @@ public class FruitApp extends PApplet {
     
     
     public void keyPressed(KeyEvent kev) {
-        // w = w.keyPressed(kev);
+        w = w.keyPressed(kev);
     }
 
     public static void main(String[] args) {
