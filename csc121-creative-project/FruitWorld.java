@@ -1,6 +1,6 @@
 import processing.core.PApplet;
 
-import processing.event.MouseEvent;
+
 
 import java.util.Random;
 
@@ -9,59 +9,49 @@ import java.util.Random;
 
 
 /**
- * Represents an interactive application where a drop of
- * water falls down from the top of the window. If the 
- * user clicks the mouse, the drop is moved over to the
- * location of the click;
+ * Represents a game where the player is supposed to control a basket to catch fruit
+ * by using the Right and Left arrow keys. 
  */
 public class FruitWorld {
-    // the position of the drop
-    double x;
-    double y;
+    Posn fruit;
+     Posn basket;
 
-    public FruitWorld(double x, double y) {
-        this.x = x;
-        this.y = y; 
-    }
+    
+    FruitWorld(Posn fruit, Posn basket) {
+		this.fruit = fruit;
+		this.basket = basket;
+	}
+
+	
     
     /**
-     * Renders a picture of the drop on the window
+     * Renders a picture of the fruit and basket
      */
     public PApplet draw(PApplet c) {
         c.background(255);
-        c.text("Hello!", 20, 20);
+        c.text("0", 20, 20);
         c.fill(0, 0, 255);
-        c.circle((int)this.x, (int)this.y, 15);
+        c.circle(this.fruit.getX(),this.fruit.getY(), 15);
         return c;
     }
 
     /**
-     * Produces an updated world where the drop moves
+     * Produces an updated world where the fruit moves
      * down a little bit, if it hasn't hit the bottom
-     * of the screen yet.
+     * of the screen yet. If is has hit the bottom of 
+     * the screen, a new fruit appears at the top of 
+     * the screen in a random location. 
      */
     public FruitWorld update() {
     	Random rand = new Random();
-        if (this.y < 400) {
-            return new FruitWorld(this.x, this.y + .5);
+        if (this.fruit.getY() < 400) {
+            return new FruitWorld(new Posn(this.fruit.getX(), this.fruit.getY()+1), this.basket);
         } else {
-            return new FruitWorld (rand.nextInt(400) , 0);
+            return new FruitWorld (new Posn(rand.nextInt(400) , 0), this.basket);
         }
     }
-    
-    /**
-     * Produces an updated world with the position of the
-     * drop updated to the location of the mouse press.
-     */
-    public FruitWorld mousePressed(MouseEvent mev) {
-        return new FruitWorld(mev.getX(), mev.getY());
     }
     
-    /**
-     * Produces a string rendering of the position of the
-     * drop
-     */
-    public String toString() {
-        return "[" + x + ", " + y + "]";
-    }
-}
+   
+    
+    

@@ -12,7 +12,7 @@ public class FruitApp extends PApplet {
     }
     
     public void setup() {
-        w = new FruitWorld(200, 0);
+        w = new FruitWorld(new Posn(200, 0), new Posn(200, 400));
     }
     
     public void draw() {
@@ -20,9 +20,6 @@ public class FruitApp extends PApplet {
         w.draw(this);
     }
     
-    public void mousePressed(MouseEvent mev) {
-        w = w.mousePressed(mev);
-    }
     
     public void keyPressed(KeyEvent kev) {
         // w = w.keyPressed(kev);
