@@ -1,4 +1,4 @@
- import processing.core.*;
+import processing.core.*;
 import processing.event.*;
 
 /**
@@ -12,7 +12,7 @@ public class FruitApp extends PApplet {
     }
     
     public void setup() {
-        w = new FruitWorld(new Posn(200, 0), new Posn(200, 350));
+        w = new FruitWorld(new Fruit(new Posn(200, 0)), new Basket(new Posn(200, 350)));
     }
     
     public void draw() {

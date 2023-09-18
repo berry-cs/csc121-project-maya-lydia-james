@@ -13,28 +13,26 @@ import java.util.Random;
  * by using the Right and Left arrow keys. 
  */
 public class FruitWorld {
-    Posn fruit;
-     Posn basket;
-
+Fruit f;
+Basket b;
     
-    FruitWorld(Posn fruit, Posn basket) {
-		this.fruit = fruit;
-		this.basket = basket;
-	}
 
-	
+FruitWorld(Fruit f, Basket b) {
+	this.f = f;
+	this.b = b;
+}
+
+
+
+/** produce an image of the state of this animation on given canvas */
+public PApplet draw(PApplet c) {
+	c.background(255);
+    this.f.draw(c);
+    this.b.draw(c);
+    return c;
+}
     
-    /**
-     * Renders a picture of the fruit and basket
-     */
-    public PApplet draw(PApplet c) {
-        c.background(255);
-        c.text("0", 20, 20);
-        c.fill(0, 0, 255);
-        c.circle(this.fruit.getX(),this.fruit.getY(), 10);
-        c.rect(this.basket.getX(), this.basket.getY(), 30, 10);
-        return c;
-    }
+   
 
     /**
      * Produces an updated world where the fruit moves
@@ -45,10 +43,10 @@ public class FruitWorld {
      */
     public FruitWorld update() {
     	Random rand = new Random();
-        if (this.fruit.getY() < 400) {
-            return new FruitWorld(new Posn(this.fruit.getX(), this.fruit.getY()+1), this.basket);
+        if (this.f.loc.getY() < 400) {
+            return new FruitWorld(new Fruit(new Posn(this.f.loc.getX(), this.f.loc.getY()+1)), this.b);
         } else {
-            return new FruitWorld (new Posn(rand.nextInt(400) , 0), this.basket);
+            return new FruitWorld (new Fruit(new Posn(rand.nextInt(400) , 0)), this.b);
         }
     }
     
@@ -56,15 +54,11 @@ public class FruitWorld {
 
 public FruitWorld keyPressed(KeyEvent kev) {
    if (kev.getKeyCode() == PApplet.LEFT) {
-        return new FruitWorld(this.fruit, this.basket.translate(new Posn(-10, 0)));
+        return new FruitWorld(this.f, new Basket(this.b.loc.translate(new Posn(-10, 0))));
     } else if (kev.getKeyCode() == PApplet.RIGHT) {
-        return new FruitWorld(this.fruit, this.basket.translate(new Posn(10, 0)));
+        return new FruitWorld(this.f, new Basket (this.b.loc.translate(new Posn(10, 0))));
     } else {
         return this;
     }
 }
 }
-    
-   
-    
-    
