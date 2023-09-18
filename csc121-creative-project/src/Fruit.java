@@ -2,6 +2,7 @@ import java.util.Objects;
 
 import processing.core.*;
 
+interface IFalling{
 
 public class Fruit {
 
@@ -18,4 +19,5 @@ Posn loc;
         c.circle(this.loc.getX(), this.loc.getY(), 10);
         return c;
     }
+}
 }
