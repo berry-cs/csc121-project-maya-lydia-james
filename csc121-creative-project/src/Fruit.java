@@ -1,9 +1,9 @@
-import java.util.Objects;
+import java.util.Objects; 
 
 import processing.core.*;
 
 
-public class Fruit {
+public class Fruit implements IFalling {
 
 Posn loc;
     
@@ -16,6 +16,6 @@ Posn loc;
         c.noStroke();  // no outline
         c.fill(255, 0, 0); // (R, G, B) = "red"
         c.circle(this.loc.getX(), this.loc.getY(), 10);
-        return c;
+        return c; 
     }
 }

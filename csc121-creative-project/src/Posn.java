@@ -35,7 +35,7 @@ public class Posn {
     /** produces the distance between this and that */
     public double distanceTo(Posn that) {
         return Math.sqrt( Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2) );
-    }
+    } 
     
     /** produces this posn's coordinates multiplied by d */
     public Posn scale(double d) {

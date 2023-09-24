@@ -11,8 +11,9 @@ public class FruitApp extends PApplet {
         this.size(400, 400);
     }
     
+    // added bomb to 0,0 to stay there until implemented ??
     public void setup() {
-        w = new FruitWorld(new Fruit(new Posn(200, 0)), new Basket(new Posn(200, 350)));
+        w = new FruitWorld(new Fruit(new Posn(200, 0)), new Basket(new Posn(200, 350)), new Bomb(new Posn (0,0)));
     }
     
     public void draw() {

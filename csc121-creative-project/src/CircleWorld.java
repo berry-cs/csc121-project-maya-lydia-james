@@ -25,7 +25,7 @@ public class CircleWorld {
         c.text("Hello!", 20, 20);
         c.fill(0, 0, 255);
         c.circle((int)this.x, (int)this.y, 15);
-        return c;
+        return c; 
     }
 
     /**

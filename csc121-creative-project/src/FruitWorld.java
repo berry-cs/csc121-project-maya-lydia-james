@@ -15,11 +15,13 @@ import java.util.Random;
 public class FruitWorld {
 Fruit f;
 Basket b;
+Bomb bo;
     
 
-FruitWorld(Fruit f, Basket b) {
+FruitWorld(Fruit f, Basket b, Bomb bo) {
 	this.f = f;
 	this.b = b;
+	this.bo = bo;
 }
 
 
@@ -29,6 +31,7 @@ public PApplet draw(PApplet c) {
 	c.background(255);
     this.f.draw(c);
     this.b.draw(c);
+    this.bo.draw(c);
     return c;
 }
     
@@ -41,22 +44,28 @@ public PApplet draw(PApplet c) {
      * the screen, a new fruit appears at the top of 
      * the screen in a random location. 
      */
+
+
+// add bomb instance to update method
+
     public FruitWorld update() {
     	Random rand = new Random();
         if (this.f.loc.getY() < 400) {
-            return new FruitWorld(new Fruit(new Posn(this.f.loc.getX(), this.f.loc.getY()+1)), this.b);
+            return new FruitWorld(new Fruit(new Posn(this.f.loc.getX(), this.f.loc.getY()+1)), this.b, this.bo);
         } else {
-            return new FruitWorld (new Fruit(new Posn(rand.nextInt(400) , 0)), this.b);
+            return new FruitWorld (new Fruit(new Posn(rand.nextInt(400) , 0)), this.b, this.bo);
         }
     }
     
 /** moves the basket in response to Keys*/
 
+   // add bomb instance to keyPressed method
+    
 public FruitWorld keyPressed(KeyEvent kev) {
    if (kev.getKeyCode() == PApplet.LEFT) {
-        return new FruitWorld(this.f, new Basket(this.b.loc.translate(new Posn(-10, 0))));
+        return new FruitWorld(this.f, new Basket(this.b.loc.translate(new Posn(-10, 0))), this.bo);
     } else if (kev.getKeyCode() == PApplet.RIGHT) {
-        return new FruitWorld(this.f, new Basket (this.b.loc.translate(new Posn(10, 0))));
+        return new FruitWorld(this.f, new Basket (this.b.loc.translate(new Posn(10, 0))), this.bo);
     } else {
         return this;
     }
