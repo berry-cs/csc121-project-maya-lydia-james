@@ -13,7 +13,7 @@ public class FruitApp extends PApplet {
     
     // added bomb to 0,0 to stay there until implemented ??
     public void setup() {
-        w = new FruitWorld(new Fruit(new Posn(200, 0)), new Basket(new Posn(200, 350)), new Bomb(new Posn (0,0)));
+        w = new FruitWorld(new Basket(new Posn(200, 350)), new ConsLoF(new Fruit(new Posn(200, 0)), new MTLoF()), 0);
     }
     
     public void draw() {

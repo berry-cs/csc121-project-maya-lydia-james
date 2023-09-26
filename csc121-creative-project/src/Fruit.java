@@ -3,13 +3,12 @@ import java.util.Objects;
 import processing.core.*;
 
 
-public class Fruit implements IFalling {
-
+public class Fruit implements IFalling{
 Posn loc;
-    
+
     public Fruit(Posn loc) {
         this.loc = loc;
-    }
+    }	
 
     /** display on the PApplet canvas */
     public PApplet draw(PApplet c) {
@@ -17,5 +16,11 @@ Posn loc;
         c.fill(255, 0, 0); // (R, G, B) = "red"
         c.circle(this.loc.getX(), this.loc.getY(), 10);
         return c; 
+    }
+    
+/** get loc */
+    
+    public Posn getLoc() {
+    	return this.loc;
     }
 }
