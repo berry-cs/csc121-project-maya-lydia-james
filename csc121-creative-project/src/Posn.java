@@ -35,7 +35,7 @@ public class Posn {
     /** produces the distance between this and that */
     public double distanceTo(Posn that) {
         return Math.sqrt( Math.pow(this.x - that.x, 2) + Math.pow(this.y - that.y, 2) );
-    } 
+    }
     
     /** produces this posn's coordinates multiplied by d */
     public Posn scale(double d) {
@@ -70,11 +70,12 @@ public class Posn {
         return new Posn( that.x - this.x,  that.y - this.y );
     }
 
-	@Override
-	public String toString() {
-		return "Posn [x=" + x + ", y=" + y + "]";
-	}
-
+ // determine whether `this` point is within dx units to the right, 
+    //  and dy units below `that` point
+    public boolean inRange(Posn that, double dx, double dy) {
+        return this.x > that.x && this.y > that.y &&
+                this.x < (that.x + dx) && this.y < (that.y + dy);
+    }
 
     
     
