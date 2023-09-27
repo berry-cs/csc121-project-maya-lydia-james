@@ -1,13 +1,11 @@
+
 import java.util.Objects;
 
-import processing.core.*;
-
-interface IFalling{
+import processing.core.PApplet; 
 
 public class Bomb implements IFalling{
 
 Posn loc;
-    
     public Bomb(Posn loc) {
         this.loc = loc;
     }
