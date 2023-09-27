@@ -16,12 +16,14 @@ public class FruitWorld {
 Basket b;
 ILoF falling;
 int score;
+int lives;
     
 
-FruitWorld(Basket b, ILoF falling, int score) {
+FruitWorld(Basket b, ILoF falling, int score, int lives) {
 	this.b = b;
 	this.falling = falling;
 	this.score = score;
+    this.lives = lives;
 }
 
 
@@ -30,6 +32,7 @@ FruitWorld(Basket b, ILoF falling, int score) {
 public PApplet draw(PApplet c) {
 	c.background(255);
 	c.text("" + score, 20, 20);
+    c.text("" + lives, 380, 20);
     this.b.draw(c);
     this.falling.draw(c);
     return c;
@@ -49,7 +52,7 @@ public PApplet draw(PApplet c) {
 // add bomb instance to update method
 
     public FruitWorld update() {
-    	return new FruitWorld(this.b, this.falling.updates(b), this.score +this.falling.newScore(b));
+    	return new FruitWorld(this.b, this.falling.updates(b), this.score +this.falling.newScore(b), this.lives); //+this.falling.newLives(b));
     }
     
 /** moves the basket in response to Keys*/
@@ -58,9 +61,9 @@ public PApplet draw(PApplet c) {
     
 public FruitWorld keyPressed(KeyEvent kev) {
    if (kev.getKeyCode() == PApplet.LEFT) {
-        return new FruitWorld(new Basket(this.b.loc.translate(new Posn(-10, 0))), this.falling, this.score);
+        return new FruitWorld(new Basket(this.b.loc.translate(new Posn(-10, 0))), this.falling, this.score, this.lives);
     } else if (kev.getKeyCode() == PApplet.RIGHT) {
-        return new FruitWorld(new Basket (this.b.loc.translate(new Posn(10, 0))), this.falling, this.score);
+        return new FruitWorld(new Basket (this.b.loc.translate(new Posn(10, 0))), this.falling, this.score, this.lives);
     } else {
         return this;
     }
