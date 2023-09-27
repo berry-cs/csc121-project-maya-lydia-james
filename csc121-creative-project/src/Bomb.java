@@ -14,8 +14,12 @@ Posn loc;
     public PApplet draw(PApplet c) {
         c.noStroke();  // no outline
         c.fill(0, 0, 0); // (R, G, B) = "red"
-        c.circle(random(0, width), this.loc.getY(), 20);
+        c.circle(this.loc.getX(), this.loc.getY(), 20);
         return c;
     }
-}
+
+    @Override
+    public Posn getLoc() {
+        return this.loc;
+    }
 }

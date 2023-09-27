@@ -2,8 +2,6 @@ import java.util.Objects;
 
 import processing.core.*;
 
-interface IFalling{
-
 public class Fruit implements IFalling{
 Posn loc;
 
@@ -24,5 +22,4 @@ Posn loc;
     public Posn getLoc() {
     	return this.loc;
     }
-}
 }
