@@ -70,6 +70,11 @@ public class Posn {
         return new Posn( that.x - this.x,  that.y - this.y );
     }
 
+	@Override
+	public String toString() {
+		return "Posn [x=" + x + ", y=" + y + "]";
+	}
+
 
     
     

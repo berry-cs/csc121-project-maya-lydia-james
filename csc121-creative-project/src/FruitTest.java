@@ -12,6 +12,27 @@ class FruitTest {
 	
 	
 	
+	@Test
+	public void testFallingUpdate() {
+        ILoF list = new ConsLoF(new Fruit(new Posn(200, 0)), new ConsLoF(new Bomb(new Posn(124, 78)), new MTLoF()));
+        Basket b = new Basket(new Posn(200, 350));
+        
+        assertEquals(new ConsLoF(new Fruit(new Posn(200, 1)), new ConsLoF(new Bomb(new Posn(124, 79)), new MTLoF()))     ,  
+        			list.updates(b));
+	}
+	
+
+	@Test
+	public void testFallingUpdateBelowBasket() {
+        ILoF list = new ConsLoF(new Fruit(new Posn(100, 361)), new ConsLoF(new Bomb(new Posn(124, 78)), new MTLoF()));
+        Basket b = new Basket(new Posn(200, 350));
+        
+        assertEquals(new ConsLoF(new Bomb(new Posn(124, 79)), new MTLoF())    ,  
+        			list.updates(b));
+	}
+
+	
+	
 	@Test 
 	public void testPosn() {
 		

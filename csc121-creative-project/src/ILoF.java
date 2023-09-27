@@ -1,3 +1,4 @@
+import java.util.Objects;
 import java.util.Random;
 
 import processing.core.PApplet;
@@ -34,6 +35,18 @@ class MTLoF implements ILoF {
 		return 0;
 	}
 
+
+	// auto-generated methods
+
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof MTLoF;
+	}
+
+	@Override
+	public int hashCode() {
+		return MTLoF.class.hashCode();
+	}
 }
 
 class ConsLoF implements ILoF{
@@ -52,6 +65,14 @@ class ConsLoF implements ILoF{
 		return c;
 	}
 
+	
+	/* 
+	 * TODO:
+	 *    1. make everything in the list fall a little at a time
+	 *    2. after anything in the list gets below the basket, remove it from the list
+	 *    3. detect collisions with the basket, remove from the list also
+	 */
+	
 	// creates a new list of falling things based on location of basket
 	public ILoF updates(Basket b) {
 		return this;
@@ -96,6 +117,27 @@ class ConsLoF implements ILoF{
 		else {
 			return this.rest.newScore(b);
 		}
-		*/
+		 */
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(first, rest);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ConsLoF other = (ConsLoF) obj;
+		return Objects.equals(first, other.first) && Objects.equals(rest, other.rest);
+	}
+	@Override
+	public String toString() {
+		return "ConsLoF [first=" + first + ", rest=" + rest + "]";
 	}
 }

@@ -22,4 +22,26 @@ Posn loc;
     public Posn getLoc() {
         return this.loc;
     }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(loc);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bomb other = (Bomb) obj;
+		return Objects.equals(loc, other.loc);
+	}
+
+	@Override
+	public String toString() {
+		return "Bomb [loc=" + loc + "]";
+	}
 }
