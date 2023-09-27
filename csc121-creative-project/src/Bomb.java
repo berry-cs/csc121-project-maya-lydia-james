@@ -6,8 +6,11 @@ import processing.core.PApplet;
 public class Bomb implements IFalling{
 
 Posn loc;
+char type;
     public Bomb(Posn loc) {
         this.loc = loc;
+        this.type = 'b';
+        
     }
 
     /** display on the PApplet canvas */
@@ -17,6 +20,12 @@ Posn loc;
         c.circle(this.loc.getX(), this.loc.getY(), 20);
         return c;
     }
+    
+    /** get type*/
+    public char getType() {
+    	return this.type;
+    }
+
 
     @Override
     public Posn getLoc() {

@@ -5,9 +5,13 @@ import processing.core.*;
 
 public class Fruit implements IFalling{
 	Posn loc;
+	char type;
+
 
 	public Fruit(Posn loc) {
 		this.loc = loc;
+		this.type = 'f';
+		
 	}	
 
 	/** display on the PApplet canvas */
@@ -23,6 +27,11 @@ public class Fruit implements IFalling{
 	public Posn getLoc() {
 		return this.loc;
 	}
+	
+	/** get type*/
+    public char getType() {
+    	return this.type;
+    }
 
 	@Override
 	public int hashCode() {

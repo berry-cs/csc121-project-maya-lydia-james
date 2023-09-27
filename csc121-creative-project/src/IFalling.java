@@ -11,6 +11,9 @@ public interface IFalling {
     /** get loc */
     
     public Posn getLoc();
+    
+    /** get type*/
+    public char getType();
 
 }
 
