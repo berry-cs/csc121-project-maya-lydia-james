@@ -13,6 +13,9 @@ public interface ILoF {
 	//returns the new score after the whole list has been resolved
 	public int newScore(Basket b);
 	
+	//makes everything on the list fall by one space
+			public ILoF fall();
+	
 	
 
 }
@@ -35,6 +38,11 @@ class MTLoF implements ILoF {
 	public int newScore(Basket b) {
 		return 0;
 	}
+	
+	//makes everything on the list fall by one space
+			public ILoF fall() {
+				return this;
+			}
 	
 	
 
@@ -69,10 +77,14 @@ class ConsLoF implements ILoF{
 	}
 	
 	//makes everything on the list fall by one space
-		/*public ILoF fall() {
-			return new ConsLof(new this.first.getClass() (this.first.getLoc()
+		public ILoF fall() {
+			if (this.first.getType()=='f') {
+				return new ConsLoF(new Fruit(new Posn(this.first.getLoc().getX(), this.first.getLoc().getY()+1)), this.rest.fall());
+			} else {
+				return new ConsLoF(new Bomb(new Posn(this.first.getLoc().getX(), this.first.getLoc().getY()+1)), this.rest.fall());	
+			}
 		}
-		*/
+		
 
 	
 	/* 
@@ -114,29 +126,34 @@ class ConsLoF implements ILoF{
 
 	//returns the new score after the whole list has been resolved
 	public int newScore(Basket b) {
-		
+		if (this.first.getType()=='f') {
     	if(this.first.getLoc().inRange(b.loc, 30, 10)) {
     		return 1+ this.rest.newScore(b);
     	}
     	else {
     		return this.rest.newScore(b);
     	}
-		 
+		} else 
+		{ return 0;
+	
+		}
 	}
 
 
 	//returns the new lives after the whole list has been resolved
-	public int newLife(Basket b) {
-		return 0;
-		/*
+	//public int newLife(Basket b) {
+		/*if (this.first.getType()=='b') {
 		if(this.first.getLoc().inRange(b.loc, 30, 10)) {
-			return (5- this.rest.newScore(b)) && (1- this.rest.newLife(b));
+			return 1+ this.rest.newLife(b);
 		}
 		else {
-			return this.rest.newScore(b);
+			return this.rest.newLife(b);
 		}
-		*/ 
-	}
+		} else {
+			return 0;
+		}
+		
+	}*/
 
 	@Override
 	public int hashCode() {
