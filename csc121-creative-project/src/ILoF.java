@@ -21,6 +21,12 @@ public interface ILoF {
 	
 	//removes anything from the list that has collided with the basket
 			public ILoF collided(Basket b);
+	//randomly decides whether to start another IFalling
+			public ILoF drop(Basket b);
+	//randomly decides whether the new IFalling is a Fruit or Bomb
+			public boolean fruitOrBomb();
+			
+	
 	
 
 }
@@ -56,6 +62,21 @@ class MTLoF implements ILoF {
         //removes anything from the list that has collided with the basket
 			public ILoF collided(Basket b) {
 				return this;
+			}
+			
+	//randomly decides whether to start another IFalling
+			public ILoF drop(Basket b) {
+				Random rand =new Random();
+				if (this.fruitOrBomb()) {
+					return new ConsLoF (new Fruit (new Posn(rand.nextInt(400) , 0)), this);
+				} else {
+					return new ConsLoF (new Bomb (new Posn(rand.nextInt(400) , 0)), this);
+				}
+			}
+	//randomly decides whether the new IFalling is a Fruit or Bomb
+			public boolean fruitOrBomb() {
+				Random rand=new Random();
+				return rand.nextDouble()> .3;
 			}
 	
 
@@ -117,6 +138,27 @@ class ConsLoF implements ILoF{
 		}
 		
 		
+		//randomly decides whether to start another IFalling
+		public ILoF drop(Basket b) {
+			Random rand =new Random();
+			Random rand2 =new Random();
+			if (rand2.nextDouble()>.995) {
+			if (this.fruitOrBomb()) {
+				return new ConsLoF (new Fruit (new Posn(rand.nextInt(400) , 0)), this.updates(b));
+			} else {
+				return new ConsLoF (new Bomb (new Posn(rand.nextInt(400) , 0)), this.updates(b));
+			}
+			} else {
+				return this.updates(b);
+			}
+		}
+         //randomly decides whether the new IFalling is a Fruit or Bomb
+		public boolean fruitOrBomb() {
+			Random rand=new Random();
+			return rand.nextDouble()> .3;
+		}
+		
+		
 
 	
 	/* 
@@ -129,13 +171,13 @@ class ConsLoF implements ILoF{
 	// creates a new list of falling things based on location of basket
 	public ILoF updates(Basket b) {
 		
-    	Random rand = new Random();
+   	Random rand = new Random();
     if (this.first.getType()== 'f') {
     	if(this.first.getLoc().inRange(b.loc, 30, 10)) {
     		return new ConsLoF (new Fruit (new Posn(rand.nextInt(400) , 0)), this.rest.updates(b));
 
     	}
-    	else if (this.first.getLoc().getY() < 350) {
+    	else if (this.first.getLoc().getY() < 360) {
             return new ConsLoF(new Fruit(new Posn(this.first.getLoc().getX(), this.first.getLoc().getY()+1)), this.rest.updates(b));
         } else {
             return new ConsLoF (new Fruit(new Posn(rand.nextInt(400) , 0)), this.rest.updates(b));
