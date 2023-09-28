@@ -15,7 +15,12 @@ public interface ILoF {
 	
 	//makes everything on the list fall by one space
 			public ILoF fall();
+			
+    // removes anything from the list that is below the basket 
+			public ILoF belowBasket();
 	
+	//removes anything from the list that has collided with the basket
+			public ILoF collided(Basket b);
 	
 
 }
@@ -43,7 +48,15 @@ class MTLoF implements ILoF {
 			public ILoF fall() {
 				return this;
 			}
-	
+			// removes anything from the list that is below the basket 
+						public ILoF belowBasket() {
+							return this;
+						}
+						
+        //removes anything from the list that has collided with the basket
+			public ILoF collided(Basket b) {
+				return this;
+			}
 	
 
 
@@ -84,6 +97,25 @@ class ConsLoF implements ILoF{
 				return new ConsLoF(new Bomb(new Posn(this.first.getLoc().getX(), this.first.getLoc().getY()+1)), this.rest.fall());	
 			}
 		}
+     // removes anything from the list that is below the basket 
+		public ILoF belowBasket() {
+			if (this.first.getLoc().getY() < 350) {
+				return this.rest.belowBasket();
+			} else {
+				return new ConsLoF(this.first, this.rest.belowBasket());
+			}
+		}	
+		
+		
+		//removes anything from the list that has collided with the basket
+		public ILoF collided(Basket b) {
+			if(this.first.getLoc().inRange(b.loc, 30, 10)) {
+				return this.rest.collided(b);
+			} else {
+				return new ConsLoF (this.first, this.rest.collided(b));
+			}
+		}
+		
 		
 
 	
