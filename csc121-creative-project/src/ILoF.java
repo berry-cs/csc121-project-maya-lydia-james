@@ -142,7 +142,7 @@ class ConsLoF implements ILoF{
 		public ILoF drop(Basket b) {
 			Random rand =new Random();
 			Random rand2 =new Random();
-			if (rand2.nextDouble()>.995) {
+			if (rand2.nextDouble()>.999) {
 			if (this.fruitOrBomb()) {
 				return new ConsLoF (new Fruit (new Posn(rand.nextInt(400) , 0)), this.updates(b));
 			} else {
@@ -170,27 +170,26 @@ class ConsLoF implements ILoF{
 	
 	// creates a new list of falling things based on location of basket
 	public ILoF updates(Basket b) {
-		
-   	Random rand = new Random();
+
     if (this.first.getType()== 'f') {
     	if(this.first.getLoc().inRange(b.loc, 30, 10)) {
-    		return new ConsLoF (new Fruit (new Posn(rand.nextInt(400) , 0)), this.rest.updates(b));
+    		return this.rest.updates(b);
 
     	}
     	else if (this.first.getLoc().getY() < 360) {
             return new ConsLoF(new Fruit(new Posn(this.first.getLoc().getX(), this.first.getLoc().getY()+1)), this.rest.updates(b));
         } else {
-            return new ConsLoF (new Fruit(new Posn(rand.nextInt(400) , 0)), this.rest.updates(b));
+            return this.rest.updates(b);
         }
     } else {
     	if(this.first.getLoc().inRange(b.loc, 30, 10)) {
-    		return new ConsLoF (new Bomb (new Posn(rand.nextInt(400) , 0)), this.rest.updates(b));
+    		return this.rest.updates(b);
 
     	}
     	else if (this.first.getLoc().getY() < 350) {
             return new ConsLoF(new Bomb(new Posn(this.first.getLoc().getX(), this.first.getLoc().getY()+1)), this.rest.updates(b));
         } else {
-            return new ConsLoF (new Bomb(new Posn(rand.nextInt(400) , 0)), this.rest.updates(b));
+            return this.rest.updates(b);
         }
     	
     }
