@@ -26,6 +26,9 @@ public interface ILoF {
 	//randomly decides whether the new IFalling is a Fruit or Bomb
 			public boolean fruitOrBomb();
 			
+	//returns the new lives after the whole list has been resolved
+			public int newLife(Basket b);
+			
 	
 	
 
@@ -78,7 +81,10 @@ class MTLoF implements ILoF {
 				Random rand=new Random();
 				return rand.nextDouble()> .3;
 			}
-	
+			//returns the new lives after the whole list has been resolved
+			public int newLife(Basket b) {
+				return 0;
+			}
 
 
 	// auto-generated methods
@@ -142,7 +148,7 @@ class ConsLoF implements ILoF{
 		public ILoF drop(Basket b) {
 			Random rand =new Random();
 			Random rand2 =new Random();
-			if (rand2.nextDouble()>.999) {
+			if (rand2.nextDouble()>.995) {
 			if (this.fruitOrBomb()) {
 				return new ConsLoF (new Fruit (new Posn(rand.nextInt(400) , 0)), this.updates(b));
 			} else {
@@ -186,7 +192,7 @@ class ConsLoF implements ILoF{
     		return this.rest.updates(b);
 
     	}
-    	else if (this.first.getLoc().getY() < 350) {
+    	else if (this.first.getLoc().getY() < 360) {
             return new ConsLoF(new Bomb(new Posn(this.first.getLoc().getX(), this.first.getLoc().getY()+1)), this.rest.updates(b));
         } else {
             return this.rest.updates(b);
@@ -207,15 +213,15 @@ class ConsLoF implements ILoF{
     		return this.rest.newScore(b);
     	}
 		} else 
-		{ return 0;
+		{ return this.rest.newScore(b);
 	
 		}
 	}
 
 
 	//returns the new lives after the whole list has been resolved
-	//public int newLife(Basket b) {
-		/*if (this.first.getType()=='b') {
+	public int newLife(Basket b) {
+		if (this.first.getType()=='b') {
 		if(this.first.getLoc().inRange(b.loc, 30, 10)) {
 			return 1+ this.rest.newLife(b);
 		}
@@ -223,10 +229,10 @@ class ConsLoF implements ILoF{
 			return this.rest.newLife(b);
 		}
 		} else {
-			return 0;
+			return this.rest.newLife(b);
 		}
 		
-	}*/
+	}
 
 	@Override
 	public int hashCode() {

@@ -52,7 +52,12 @@ public PApplet draw(PApplet c) {
 // add bomb instance to update method
 
     public FruitWorld update() {
-    	return new FruitWorld(this.b, this.falling.drop(b), this.score +this.falling.newScore(b), this.lives); //+this.falling.newLives(b));
+    	if (this.lives <= 0) {
+    		return new FruitWorld(new Basket(new Posn(200, 350)), new ConsLoF(new Fruit(new Posn(200, 0)), new MTLoF()), 0, 3);
+    	} else {
+    	return 	new FruitWorld(this.b, this.falling.drop(b), this.score +this.falling.newScore(b), 
+    	                   this.lives-this.falling.newLife(b));
+    	}
     }
     
 /** moves the basket in response to Keys*/
