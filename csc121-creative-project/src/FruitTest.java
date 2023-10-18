@@ -127,6 +127,15 @@ FallingThings ft = new FallingThings();
         assertEquals(new Fruit(new Posn(200, 1)), array[0]);
         
     }
+    
+    @Test
+    void testNewScore() {
+         Basket b = new Basket(new Posn(200, 10));
+         Posn posn1 = new Posn(205,15);
+         Posn posn2 = new Posn (200, 10);
+         //assertEquals(1, ft.newScore(b));
+         assertEquals(true, posn1.inRange(posn2, 30,10));
+    }
 	
 	
 	

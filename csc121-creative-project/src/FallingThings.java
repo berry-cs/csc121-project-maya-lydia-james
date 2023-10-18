@@ -99,13 +99,13 @@ public class FallingThings {
 				this.things[i]=this.things[i].drop();
 				i=i+1;
 			}
-			return this.updates(b);
+			return this.fall();  // this.updates(b);
 		}
 
 	
 	// creates a new list of falling things based on location of basket
-	public FallingThings updates(Basket b) {
-		return this.fall().belowBasket().collided(b);
+	public FallingThings cleanUp(Basket b) {
+		return this.belowBasket().collided(b);
 		/*if (this.first.getType()== 'f') {
     	if(this.first.getLoc().inRange(b.loc, 30, 10)) {
     		return this.rest.updates(b);
@@ -138,7 +138,10 @@ public class FallingThings {
 		int score =0;
 		
 		while(i<3) {
-			score = score+this.things[i].newScore(b);
+			System.out.println("Checking score " + this.things[i].getLoc() + " -- " + b.loc);
+			if(this.things[i].getLoc().inRange(b.loc, 30, 10)) {
+				System.out.println( "updating score" );
+			score = score+this.things[i].newScore(b);}
 			i=i+1;
 		}
 		return score;
@@ -151,7 +154,8 @@ public class FallingThings {
 		int lives =0;
 		
 		while(i<3) {
-			lives = lives+this.things[i].newLives(b);
+			if(this.things[i].getLoc().inRange(b.loc, 30, 10)) {
+			lives = lives+this.things[i].newLives(b);}
 			i=i+1;
 		}
 		return lives;

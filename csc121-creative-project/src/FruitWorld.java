@@ -55,7 +55,8 @@ public PApplet draw(PApplet c) {
     	if (this.lives <= 0) {
     		return new FruitWorld(new Basket(new Posn(200, 350)), new FallingThings(), 0, 3);
     	} else {
-    	return 	new FruitWorld(this.b, this.falling.drop(b), this.score +this.falling.newScore(b), 
+    		int newScore = this.falling.drop(b).newScore(b);
+    	return 	new FruitWorld(this.b, this.falling.cleanUp(b), this.score + newScore, 
     	                   this.lives-this.falling.newLife(b));
     	}
     }
