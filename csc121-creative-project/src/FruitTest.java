@@ -9,8 +9,9 @@ class FruitTest {
 	Posn c = new Posn (150, 200);
 	Posn d = new Posn (200, 200);
 	Posn e = new Posn (300, 400);
-	
-	
+	IFalling fruit = new Fruit(e);
+
+
 	
 	@Test
 	public void testFallingUpdate() {
@@ -110,11 +111,24 @@ class FruitTest {
 
 	}
 	
-	@Test 
-	public void testFruit() {
-		
-		
-	}
+FallingThings ft = new FallingThings();
+    
+    @Test
+    void testFruit() {
+        IFalling[] array = ft.getThings();
+        assertEquals(new Fruit(new Posn(200, 0)), array[0]);
+        
+        ft.fall();
+        array = ft.getThings();  // get updated array
+        assertEquals(new Fruit(new Posn(200, 1)), array[0]);
+        
+        ft.belowBasket();
+        array = ft.getThings();  // get updated array
+        assertEquals(new Fruit(new Posn(200, 1)), array[0]);
+        
+    }
+	
+	
 	
 	@Test 
 	public void testBomb() {

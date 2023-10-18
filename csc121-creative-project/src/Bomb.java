@@ -25,6 +25,26 @@ char type;
     public char getType() {
     	return this.type;
     }
+    
+    /** makes the IFalling fall by one space */
+    public IFalling fall() {
+    	return new Bomb(new Posn(this.getLoc().getX(), this.getLoc().getY()+1));
+    }
+    
+    /**randomly decides whether to start another IFalling*/
+    public IFalling drop() {
+    	return this;
+    }
+    
+    /**returns 1 if IFalling is a Fruit and 0 otherwise*/
+  	public int newScore(Basket b) {
+  		return 0;
+  	}
+  	
+	/**returns 1 if IFalling is a Bomb and 0 otherwise*/
+  	public int newLives(Basket b) {
+  		return 1;
+  	}
 
 
     @Override

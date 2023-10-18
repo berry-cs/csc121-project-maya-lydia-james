@@ -14,12 +14,12 @@ import java.util.Random;
  */
 public class FruitWorld {
 Basket b;
-ILoF falling;
+FallingThings falling;
 int score;
 int lives;
     
 
-FruitWorld(Basket b, ILoF falling, int score, int lives) {
+FruitWorld(Basket b, FallingThings falling, int score, int lives) {
 	this.b = b;
 	this.falling = falling;
 	this.score = score;
@@ -53,7 +53,7 @@ public PApplet draw(PApplet c) {
 
     public FruitWorld update() {
     	if (this.lives <= 0) {
-    		return new FruitWorld(new Basket(new Posn(200, 350)), new ConsLoF(new Fruit(new Posn(200, 0)), new MTLoF()), 0, 3);
+    		return new FruitWorld(new Basket(new Posn(200, 350)), new FallingThings(), 0, 3);
     	} else {
     	return 	new FruitWorld(this.b, this.falling.drop(b), this.score +this.falling.newScore(b), 
     	                   this.lives-this.falling.newLife(b));
