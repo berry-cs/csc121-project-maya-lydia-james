@@ -30,7 +30,7 @@ FruitWorld(Basket b, FallingThings falling, int score, int lives) {
 
 /** produce an image of the state of this animation on given canvas */
 public PApplet draw(PApplet c) {
-	c.background(255);
+	c.background(255); 
 	c.text("" + score, 20, 20);
     c.text("" + lives, 380, 20);
     this.b.draw(c);
