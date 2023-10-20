@@ -104,7 +104,7 @@ public class FallingThings {
 
 	
 	// creates a new list of falling things based on location of basket
-	public FallingThings cleanUp(Basket b) {
+	public FallingThings cleanUp(Basket b) { 
 		return this.belowBasket().collided(b);
 		/*if (this.first.getType()== 'f') {
     	if(this.first.getLoc().inRange(b.loc, 30, 10)) {
@@ -142,7 +142,7 @@ public class FallingThings {
 			if(this.things[i].getLoc().inRange(b.loc, 30, 10)) {
 				System.out.println( "updating score" );
 			score = score+this.things[i].newScore(b);}
-			i=i+1;
+			i=i+1; 
 		}
 		return score;
 	}
