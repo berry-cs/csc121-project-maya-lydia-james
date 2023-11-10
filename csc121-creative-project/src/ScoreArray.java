@@ -13,6 +13,7 @@ private HighScore[] scores;
         this.scores[4]=new HighScore("xxx",0);
     }
 
+    //returns the highest score in the array
     public HighScore getHighest() {
     	int i =1;
     	HighScore highest = this.scores[0];
@@ -28,6 +29,8 @@ private HighScore[] scores;
     	return highest;
     	
     	}
+    
+    //removes the highest score from the array
     public ScoreArray removeHighest() {
     	int i=0;
     	while(i < 5) {
@@ -38,6 +41,7 @@ private HighScore[] scores;
     	return this;
     }
     
+    //sorts the ScoreArray from lowest to highest 
     public ScoreArray sort() {
     ScoreArray save = this;
     ScoreArray use = this;
@@ -51,6 +55,35 @@ private HighScore[] scores;
     }
     	return this;
     }
+    
+    //returns the position that the score should be added to. If the score is lower than the high scores in the array, returns 6
+    public int maybeScore(int score) {
+    	int i= 0;
+    	while (i<5) {
+    		if (score>this.scores[i].getScore()) {
+    			return i;
+    		}
+    		i=i+1;
+    	}
+    	return 6;
+    }
+   public ScoreArray addScore(HighScore score, int pos ) {
+	   int i=pos+1;
+	   HighScore save = this.scores[pos];
+	   HighScore save2 = this.scores[pos];
+	   this.scores[pos]=score;
+	   while(i<5) {
+		   save2=this.scores[i];
+		   this.scores[i]=save;
+		   save = save2;
+		   i=i+1;
+				   
+	   }
+	   return this;
+			   
+   }
+    
+    
 	@Override
 	public int hashCode() {
 		final int prime = 31;
