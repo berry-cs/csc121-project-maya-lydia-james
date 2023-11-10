@@ -13,7 +13,7 @@ private HighScore[] scores;
         this.scores[4]=new HighScore("xxx",0);
     }
 
-    //returns the highest score in the array
+    //returns the highest score in the array 
     public HighScore getHighest() {
     	int i =1;
     	HighScore highest = this.scores[0];
