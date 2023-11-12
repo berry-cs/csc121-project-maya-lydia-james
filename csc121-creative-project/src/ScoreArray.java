@@ -1,4 +1,7 @@
+import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.io.*;
 
 public class ScoreArray {
 private HighScore[] scores;
@@ -82,6 +85,63 @@ private HighScore[] scores;
 	   return this;
 			   
    }
+   
+   /**
+	 * saves the state of the scores in the window to a text file
+	 */
+	public void saveScore() { 
+	    try {
+	        String filename = javax.swing.JOptionPane.showInputDialog("Please enter file name:");
+	        filename = filename.trim();
+	        if (filename.equals("")) {
+	            javax.swing.JOptionPane.showMessageDialog(null, "Cannot save to a blank name");
+	            return;
+	        }
+	        if (! filename.endsWith(".txt")) {
+	            filename = filename + ".txt";
+	        }
+	        
+   	    PrintWriter pw = new PrintWriter(new File(filename));
+   	    
+   	    for (HighScore hs : this.scores) {    // for-each
+   	        hs.writeToFile(pw); 
+   	    }
+   	    
+   	    pw.close();
+	    } catch (IOException exp) {
+	        System.out.println("Problem saving tiles: " + exp.getMessage());
+	    }
+	}
+	
+	/**
+	 * restores the state of the scores in the window from a text file
+	 */
+	public void loadScore() {
+	    try {
+	        String filename = javax.swing.JOptionPane.showInputDialog("Please enter file name:");
+            filename = filename.trim();
+            if (filename.equals("")) {
+                javax.swing.JOptionPane.showMessageDialog(null, "Cannot load from a blank name");
+                return;
+            }
+            if (! filename.endsWith(".txt")) {
+                filename = filename + ".txt";
+            }
+            
+	        Scanner sc = new Scanner(new File(filename));
+	       
+	        
+	        while (sc.hasNextInt()) {	            
+	            new HighScore(sc);   
+	        }
+	        
+	        sc.close();
+	    } catch (IOException exp) {
+	        System.out.println("Problem loading tiles: " + exp.getMessage());
+	    } 
+	    
+	    
+	}
     
     
 	@Override

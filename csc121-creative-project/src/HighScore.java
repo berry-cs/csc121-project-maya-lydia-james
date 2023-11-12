@@ -1,4 +1,6 @@
+import java.io.PrintWriter;
 import java.util.Objects;
+import java.util.Scanner;
 
 /** represents a high score in the fruit game with the name of the player and the score they achieved*/
 public class HighScore {
@@ -9,6 +11,15 @@ private int score;
     public HighScore(String name, int score) {
         this.name = name;
         this.score = score;
+    }
+    
+    public HighScore(Scanner sc) {
+    	this.name = sc.next();
+    	this.score = sc.nextInt();
+    } 
+    
+    public void writeToFile(PrintWriter pw) {
+    	pw.println(this.name + " " + this.score);
     }
 
 	public String getName() {

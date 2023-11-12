@@ -2,6 +2,9 @@ import processing.core.PApplet;
 
 import processing.event.KeyEvent;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 
@@ -70,8 +73,21 @@ public FruitWorld keyPressed(KeyEvent kev) {
         return new FruitWorld(new Basket(this.b.loc.translate(new Posn(-10, 0))), this.falling, this.score, this.lives);
     } else if (kev.getKeyCode() == PApplet.RIGHT) {
         return new FruitWorld(new Basket (this.b.loc.translate(new Posn(10, 0))), this.falling, this.score, this.lives);
-    } else {
+    } 
+    else if (kev.getKeyCode() == 's') {
+    	return this;
+    	// return this.saveScore(); 
+    }
+    else if (kev.getKeyCode() == 'o') {
+    	return this;
+    	// return this.loadScore(); 
+    } 
+    else {
         return this;
     }
 }
+
+
+
+
 }
