@@ -101,7 +101,8 @@ private HighScore[] scores;
    	    }
    	    int i=0;
    	    while (i<5) {  /*  hour = hour + 1    ====    hour += 1    =====    hour++   */
-				pw.println(this.scores[i].getName() + ": " + this.scores[i].getScore());
+				System.out.println(this.scores[i].getName() + ": " + this.scores[i].getScore());
+				i=i+1;
 		}
    	    
    	    pw.close();
@@ -116,13 +117,14 @@ private HighScore[] scores;
 	public void loadScore() {
 	    try {
 	        Scanner sc = new Scanner(new File("output.txt"));
+	         int i=0;
 	       
 	        
 	        while (sc.hasNextInt()) {	            
 	            HighScore hs = new HighScore(sc); 
-	            if (this.maybeScore(hs.getScore())<6) {
-					this.addScore(hs.getScore(), this.maybeScore(hs.getScore()), hs.getName());
-				}
+					this.addScore(hs.getScore(), i, hs.getName());
+					i=i+1;
+				
 	            
 	        }
 	        

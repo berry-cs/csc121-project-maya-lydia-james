@@ -48,7 +48,7 @@ public PApplet draw(PApplet c) {
 	c.text("" + score, FruitApp.textMargin, FruitApp.textMargin);
     c.text("" + lives, FruitApp.screenWidth-FruitApp.textMargin, FruitApp.textMargin);
     this.falling.draw(c);
-    c.imageMode(c.CENTER);
+    c.imageMode(PApplet.CORNER);
     c.image(c.loadImage("basket2.jpg"), this.b.getLoc().getX(), this.b.getLoc().getY(), 
     		Basket.basketWidth, Basket.basketHeight);
     return c;
@@ -67,9 +67,10 @@ public PApplet draw(PApplet c) {
     	if (this.lives <= 0) {
     		ScoreArray highscores = new ScoreArray();
     		            highscores.loadScore();
-    				if (highscores.maybeScore(this.score)<6) {
+    		            int num = highscores.maybeScore(this.score);
+    				if (num<6) {
     					String name = javax.swing.JOptionPane.showInputDialog("Please enter your name:");
-    					highscores.addScore(this.score, highscores.maybeScore(this.score), name);
+    					highscores = highscores.addScore(this.score, num, name);
     				}
     				highscores.saveScore();
     			return new FruitWorld(new Basket(new Posn(FruitApp.midScreen, FruitApp.screenHeight-FruitApp.basketMargin)),
