@@ -70,11 +70,13 @@ private HighScore[] scores;
     	}
     	return 6;
     }
-   public ScoreArray addScore(HighScore score, int pos ) {
+    //adds the given score to this ScoreArray at the given position
+    public ScoreArray addScore(int score, int pos, String name ) {
 	   int i=pos+1;
 	   HighScore save = this.scores[pos];
 	   HighScore save2 = this.scores[pos];
-	   this.scores[pos]=score;
+	   
+	   this.scores[pos]= new HighScore(name, score);
 	   while(i<5) {
 		   save2=this.scores[i];
 		   this.scores[i]=save;
@@ -87,29 +89,24 @@ private HighScore[] scores;
    }
    
    /**
-	 * saves the state of the scores in the window to a text file
+	 * saves the current HighScore list to a text file
 	 */
 	public void saveScore() { 
 	    try {
-	        String filename = javax.swing.JOptionPane.showInputDialog("Please enter file name:");
-	        filename = filename.trim();
-	        if (filename.equals("")) {
-	            javax.swing.JOptionPane.showMessageDialog(null, "Cannot save to a blank name");
-	            return;
-	        }
-	        if (! filename.endsWith(".txt")) {
-	            filename = filename + ".txt";
-	        }
 	        
-   	    PrintWriter pw = new PrintWriter(new File(filename));
+   	    PrintWriter pw = new PrintWriter(new File("output.txt"));
    	    
    	    for (HighScore hs : this.scores) {    // for-each
    	        hs.writeToFile(pw); 
    	    }
+   	    int i=0;
+   	    while (i<5) {  /*  hour = hour + 1    ====    hour += 1    =====    hour++   */
+				pw.println(this.scores[i].getName() + ": " + this.scores[i].getScore());
+		}
    	    
    	    pw.close();
 	    } catch (IOException exp) {
-	        System.out.println("Problem saving tiles: " + exp.getMessage());
+	        System.out.println("Problem saving scores:" + exp.getMessage());
 	    }
 	}
 	
@@ -118,26 +115,20 @@ private HighScore[] scores;
 	 */
 	public void loadScore() {
 	    try {
-	        String filename = javax.swing.JOptionPane.showInputDialog("Please enter file name:");
-            filename = filename.trim();
-            if (filename.equals("")) {
-                javax.swing.JOptionPane.showMessageDialog(null, "Cannot load from a blank name");
-                return;
-            }
-            if (! filename.endsWith(".txt")) {
-                filename = filename + ".txt";
-            }
-            
-	        Scanner sc = new Scanner(new File(filename));
+	        Scanner sc = new Scanner(new File("output.txt"));
 	       
 	        
 	        while (sc.hasNextInt()) {	            
-	            new HighScore(sc);   
+	            HighScore hs = new HighScore(sc); 
+	            if (this.maybeScore(hs.getScore())<6) {
+					this.addScore(hs.getScore(), this.maybeScore(hs.getScore()), hs.getName());
+				}
+	            
 	        }
 	        
 	        sc.close();
 	    } catch (IOException exp) {
-	        System.out.println("Problem loading tiles: " + exp.getMessage());
+	        System.out.println("Problem loading scores: " + exp.getMessage());
 	    } 
 	    
 	    

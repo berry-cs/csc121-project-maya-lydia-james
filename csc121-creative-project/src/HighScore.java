@@ -14,12 +14,12 @@ private int score;
     }
     
     public HighScore(Scanner sc) {
-    	this.name = sc.next();
     	this.score = sc.nextInt();
+    	this.name = sc.nextLine();
     } 
     
     public void writeToFile(PrintWriter pw) {
-    	pw.println(this.name + " " + this.score);
+    	pw.println(this.score + " " + this.name);
     }
 
 	public String getName() {
